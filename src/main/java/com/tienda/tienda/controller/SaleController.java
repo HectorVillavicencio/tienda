@@ -23,8 +23,8 @@ public class SaleController {
 
     // Obtener una venta por ID
     @GetMapping("/{id}")
-    public Optional<Sale> getSale(@PathVariable("id") Integer idSale) {
-        return saleService.getSale(idSale);
+    public Optional<Sale> getSale(@PathVariable("id") Integer id) {
+        return saleService.getSale(id);
     }
 
     // Guardar una nueva venta
@@ -34,7 +34,7 @@ public class SaleController {
     }
 
     // Eliminar una venta por ID
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public boolean delete(@PathVariable("id") Integer idSale) {
         return saleService.delete(idSale);
     }
@@ -46,7 +46,7 @@ public class SaleController {
     }
 
     // Obtener ventas por producto
-    @GetMapping("/{idProduct}")
+    @GetMapping("/product/{idProduct}")
     public Optional<List<Sale>> getByProduct(@RequestParam("idProduct") Integer idProduct) {
         return saleService.getByProduct(idProduct);
     }

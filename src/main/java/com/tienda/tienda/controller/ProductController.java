@@ -50,7 +50,6 @@ public class ProductController {
         return productService.getByPriceLessThan(price);
     }
 
-
     @GetMapping("/category/{category}")  // Ruta para obtener productos por categoría
     public Optional<List<Product>> getByCategory(@PathVariable("category") String category) {
         return productService.getByCategory(category);

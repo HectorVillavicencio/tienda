@@ -53,6 +53,7 @@ public class SellerController {
     public float calculateCommissionForSeller(@PathVariable("idSeller")  Integer idSeller){
         return sellerService.calculateCommissionForSeller(idSeller);
     }
+
     @GetMapping("salary/{idSeller}")
     public float totalSalary(@PathVariable("idSeller") Integer idSeller){
         return sellerService.totalSalary(idSeller);

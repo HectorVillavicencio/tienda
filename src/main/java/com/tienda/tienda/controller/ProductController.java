@@ -17,27 +17,25 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/all")  // Ruta única para obtener todos los productos
+    @GetMapping("/all")
     public List<Product> getAll() {
         return productService.getAll();
     }
 
-    @GetMapping("/{id}")  // Ruta única para obtener producto por id
+    @GetMapping("/{id}")
     public Optional<Product> getProduct(@PathVariable String id) {
         try {
-            // Intentamos convertir el id en un entero
+
             int productId = Integer.parseInt(id);
             return productService.getProduct(productId);
         } catch (NumberFormatException e) {
-            // Si la conversión falla, lanzamos un error con un mensaje claro
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El ID proporcionado no es un número entero válido.");
         } catch (Exception e) {
-            // Capturamos otros posibles errores
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error interno al obtener el producto.", e);
         }
     }
 
-    @PostMapping ("/save") // Ruta para guardar un nuevo producto
+    @PostMapping ("/save")
     public Product save(@RequestBody Product product) {
         return productService.save(product);
     }
@@ -47,17 +45,17 @@ public class ProductController {
         return productService.delete(id);
     }
 
-    @GetMapping("/name/{name}")  // Ruta para obtener productos por nombre
+    @GetMapping("/name/{name}")
     public Optional<List<Product>> getByName(@PathVariable("name") String name) {
         return productService.getByName(name);
     }
 
-    @GetMapping("/pricegt/{price}")  // Ruta para obtener productos por precio
+    @GetMapping("/pricegt/{price}")
     public Optional<List<Product>> getByPriceGreaterThan(@PathVariable("price") float price) {
         return productService.getByPriceGreaterThan(price);
     }
 
-    @GetMapping("/pricelt/{price}")  // Ruta para obtener productos por precio
+    @GetMapping("/pricelt/{price}")
     public Optional<List<Product>> getByPriceLessThan(@PathVariable("price") float price) {
         return productService.getByPriceLessThan(price);
     }

@@ -27,13 +27,11 @@ public class SellerController {
         return sellerService.getSeller(idSeller);
     }
 
-    // Guardar un nuevo vendedor
     @PostMapping("/save")
     public Seller save(@RequestBody Seller seller) {
         return sellerService.save(seller);
     }
 
-    // Eliminar un vendedor por ID
     @DeleteMapping("/delete/{id}")
     public boolean delete(@PathVariable("id") Integer idSeller) {
         return sellerService.delete(idSeller);
@@ -54,7 +52,7 @@ public class SellerController {
         return sellerService.calculateCommissionForSeller(idSeller);
     }
 
-    @GetMapping("salary/{idSeller}")
+    @GetMapping("ts/{idSeller}")
     public float totalSalary(@PathVariable("idSeller") Integer idSeller){
         return sellerService.totalSalary(idSeller);
     }

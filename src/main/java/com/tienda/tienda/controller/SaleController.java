@@ -28,7 +28,7 @@ public class SaleController {
     }
 
     // Guardar una nueva venta
-    @PostMapping
+    @PostMapping("/save")
     public Sale save(@RequestBody Sale sale) {
         return saleService.save(sale);
     }

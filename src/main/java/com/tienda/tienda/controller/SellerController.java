@@ -28,13 +28,13 @@ public class SellerController {
     }
 
     // Guardar un nuevo vendedor
-    @PostMapping
+    @PostMapping("/save")
     public Seller save(@RequestBody Seller seller) {
         return sellerService.save(seller);
     }
 
     // Eliminar un vendedor por ID
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public boolean delete(@PathVariable("id") Integer idSeller) {
         return sellerService.delete(idSeller);
     }

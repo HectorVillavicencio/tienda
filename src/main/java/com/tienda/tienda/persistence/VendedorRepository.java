@@ -54,6 +54,9 @@ public class VendedorRepository implements SellerRepository {
     public Seller save(Seller seller) {
         try {
             Vendedor vendedor = mapper.toVendedor(seller);
+            System.out.println("Guardando Vendedor: id=" + vendedor.getId() +
+                    ", nombre=" + vendedor.getNombre() +
+                    ", sueldo=" + vendedor.getSueldo());
             return mapper.toSeller(vendedorCrudRepository.save(vendedor));
         } catch (Exception e) {
             System.out.println("Error al guardar al vendedor: " + e.getMessage());

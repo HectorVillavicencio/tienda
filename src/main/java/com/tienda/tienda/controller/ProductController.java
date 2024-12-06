@@ -3,7 +3,9 @@ package com.tienda.tienda.controller;
 import com.tienda.tienda.domain.Product;
 import com.tienda.tienda.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +23,18 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")  // Ruta única para obtener producto por id
-    public Optional<Product> getProduct(@PathVariable int id) {
-        return productService.getProduct(id);
+    public Optional<Product> getProduct(@PathVariable String id) {
+        try {
+            // Intentamos convertir el id en un entero
+            int productId = Integer.parseInt(id);
+            return productService.getProduct(productId);
+        } catch (NumberFormatException e) {
+            // Si la conversión falla, lanzamos un error con un mensaje claro
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El ID proporcionado no es un número entero válido.");
+        } catch (Exception e) {
+            // Capturamos otros posibles errores
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error interno al obtener el producto.", e);
+        }
     }
 
     @PostMapping ("/save") // Ruta para guardar un nuevo producto
@@ -50,7 +62,7 @@ public class ProductController {
         return productService.getByPriceLessThan(price);
     }
 
-    @GetMapping("/category/{category}")  // Ruta para obtener productos por categoría
+    @GetMapping("/category/{category}")
     public Optional<List<Product>> getByCategory(@PathVariable("category") String category) {
         return productService.getByCategory(category);
     }
